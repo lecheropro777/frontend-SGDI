@@ -64,6 +64,18 @@ function NavBarPC(props) {
         ) : (
           false
         )}
+        { rol.Rol === "admin" ? (
+          <button
+            onClick={() => {
+              navigate("/Logs");
+            }}
+            className="mx-4 text-white hover:text-slate-400"
+          >
+            Logs
+          </button>
+        ) : (
+          false
+        )}
         <button
           className=" mx-4 text-red-600 hover:text-slate-400 font-black"
           onClick={() => {

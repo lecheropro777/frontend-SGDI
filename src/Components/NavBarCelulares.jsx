@@ -69,6 +69,7 @@ function NavBarCelulares(props) {
                 false
               )}
               {rol.Rol === "admin" ? (
+                <>
                 <MenuItem
                   onClick={() => {
                     popupState.close();
@@ -77,6 +78,15 @@ function NavBarCelulares(props) {
                 >
                   Nuevo Usuario
                 </MenuItem>
+                <MenuItem
+                onClick={() => {
+                  popupState.close();
+                  navigate("/Registro");
+                }}
+              >
+                Logs
+              </MenuItem>
+              </>
               ) : (
                 false
               )}

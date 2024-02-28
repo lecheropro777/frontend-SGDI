@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 import { useContext } from "react";
 import { Contexto } from "../Context/ContextProvider";
 import { jsPDF } from "jspdf";
+import { AuthContext } from "../Context/AuthProvider";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -33,6 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function Tabla(props) {
   const { EliminarObjetos } = useContext(Contexto);
+  const {usuario}=useContext(AuthContext)
   const rows = props.data;
   const navigate = useNavigate();
 
@@ -101,7 +104,7 @@ function Tabla(props) {
                     variant="contained"
                     color="error"
                     onClick={() => {
-                      EliminarObjetos(row._id);
+                      EliminarObjetos(row._id,usuario);
                     }}
                   >
                     Eliminar

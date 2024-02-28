@@ -8,8 +8,9 @@ export const VerTareas = async () => await axios.get(`${BaseUrlProductos}`);
 export const CrearTarea = async (producto) =>
   await axios.post(`${BaseUrlProductos}`, producto);
 
-export const BorrarTarea = async (id) =>
-  await axios.delete(`${BaseUrlProductos}/${id}`);
+export const BorrarTarea = async (id, usuario) => {
+  await axios.post(`${BaseUrlProductos}/eliminar/${id}`, usuario);
+};
 
 export const ActualizarTarea = async (id, producto) =>
   await axios.put(`${BaseUrlProductos}/${id}`, producto);
@@ -24,12 +25,12 @@ export const verProductoPorCodigoBarrasRequest = async (codigoBarras) => {
   );
 };
 
-export const agregarProductosRequest = async (id, Cantidad) => {
-  return await axios.put(`${BaseUrlProductos}/aumentar/${id}`, Cantidad);
+export const agregarProductosRequest = async (id, datos) => {
+  return await axios.put(`${BaseUrlProductos}/aumentar/${id}`, datos);
 };
 
-export const retirarProductosRequest = async (id, Cantidad) => {
-  return await axios.put(`${BaseUrlProductos}/retirar/${id}`, Cantidad);
+export const retirarProductosRequest = async (id, datos) => {
+  return await axios.put(`${BaseUrlProductos}/retirar/${id}`, datos);
 };
 
 export const verPendientesRequest = async () => {

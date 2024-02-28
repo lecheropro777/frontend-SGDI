@@ -10,6 +10,7 @@ import { Pendientes } from "./pages/Pendientes";
 import { AuthContext } from "./Context/AuthProvider";
 import { useContext, lazy, Suspense } from "react";
 import { AdministrarUsuarios } from "./pages/AdministrarUsuarios";
+import { Logs } from "./pages/logs";
 const Inventario = lazy(() => import("./Zona1/Inventario"));
 const Meter = lazy(() => import("./Components/Meter"));
 const Retirar = lazy(() => import("./Components/Retirar"));
@@ -95,10 +96,20 @@ function App() {
                 path="/AdministrarUsuarios"
                 element={<AdministrarUsuarios />}
               />
+              <Route
+                path="/Logs"
+                element={
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <Logs />
+                  </Suspense>
+                }
+              />
             </>
           ) : (
             false
           )}
+
+
         </Route>
       </Routes>
     </>

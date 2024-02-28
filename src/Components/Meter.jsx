@@ -1,11 +1,15 @@
 import { useContext, useState, lazy } from "react";
 import { Button, TextField } from "@mui/material";
 import { Contexto } from "../Context/ContextProvider";
-const Swal = lazy(() => import("sweetalert2"));
+// const Swal = lazy(() => import("sweetalert2"));
+
 import { QRScanner } from "./QrScanner";
+import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
 function Meter() {
   console.log(QRScanner);
   const { verProductoPorCodigoBarras, agregarProductos } = useContext(Contexto);
+  const {usuario}=useContext(AuthContext)
   const [CodigoBarras, setCodigoBarras] = useState("");
   const [cantidad, setCantidad] = useState(null);
   const [producto, setProducto] = useState({
@@ -35,8 +39,13 @@ function Meter() {
   };
 
   const submitCantidad = async () => {
-    const cantidadParaAgregar = cantidad;
-    const CantidadParseada = { Cantidad: cantidadParaAgregar };
+    // const cantidadParaAgregar = cantidad;
+    // const CantidadParseada = { cantidadParaAgregar };
+    const datos={
+      Cantidad:cantidad,
+      Usuario:usuario.usuario
+    }
+
     Swal.fire({
       title: "¿Agregar mas existencias?",
       showDenyButton: true,
@@ -46,7 +55,7 @@ function Meter() {
       if (result.isConfirmed) {
         const enviarCantidadNueva = agregarProductos(
           producto.id,
-          CantidadParseada
+          datos
         );
         window.location.href = "/inventario";
       }

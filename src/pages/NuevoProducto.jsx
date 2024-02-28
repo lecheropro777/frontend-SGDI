@@ -3,10 +3,10 @@ import { Formik, Form } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
 import { Contexto } from "../Context/ContextProvider.jsx";
 import { Button, TextField } from "@mui/material";
-// import { AuthContext } from "../Context/AuthProvider.jsx";
+import { AuthContext } from "../Context/AuthProvider.jsx";
 
 export function NuevoProducto() {
-  // const{rol,usuario}=useContext(AuthContext)
+  const{rol,usuario}=useContext(AuthContext)
   const navigate = useNavigate();
   const { CrearObjeto, VerObjeto, ActualizarObjeto } = useContext(Contexto);
   const [data, setData] = useState({
@@ -15,6 +15,7 @@ export function NuevoProducto() {
     CantidadMinima: "",
     Unidad: "",
     Proveedor: "",
+    Usuario:usuario.usuario
   });
   const params = useParams();
   useEffect(() => {
@@ -28,6 +29,7 @@ export function NuevoProducto() {
           CantidadMinima: data.CantidadMinima,
           Unidad: data.Unidad,
           Proveedor: data.Proveedor,
+          Usuario:usuario.usuario
         });
       };
       loadTask();
@@ -41,17 +43,12 @@ export function NuevoProducto() {
         enableReinitialize={true}
         onSubmit={async (values, actions) => {
           if (params.id) {
+            console.log(values)
             await ActualizarObjeto(params.id, values);
           } else {
             await CrearObjeto(values);
           }
-          setData({
-            Nombre: "",
-            Cantidad: "",
-            CantidadMinima: "",
-            Unidad: "",
-            Proveedor: "",
-          });
+          
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (

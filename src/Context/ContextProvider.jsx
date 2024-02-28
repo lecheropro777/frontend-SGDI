@@ -49,7 +49,7 @@ export const InventarioProvider = ({ children }) => {
     });
   };
 
-  const EliminarObjetos = async (id) => {
+  const EliminarObjetos = async (id,usuario) => {
     Swal.fire({
       title: "Desea eliminar?",
       text: "Nose podra recuperar!",
@@ -57,10 +57,10 @@ export const InventarioProvider = ({ children }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "SI",
+      confirmButtonText: "Sí",
     }).then((result) => {
       if (result.isConfirmed) {
-        BorrarTarea(id);
+        BorrarTarea(id,usuario);
         setData(data.filter((item) => item._id !== id));
         window.location.href="/inventario"
       }
@@ -74,7 +74,7 @@ export const InventarioProvider = ({ children }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "SI",
+      confirmButtonText: "Sí",
     }).then((result) => {
       if (result.isConfirmed) {
         ActualizarTarea(id, newFields);
@@ -91,15 +91,15 @@ export const InventarioProvider = ({ children }) => {
     return;
   };
 
-  const agregarProductos = async (id, Cantidad) => {
-    const respuesta = await agregarProductosRequest(id, Cantidad);
+  const agregarProductos = async (id, datos) => {
+    const respuesta = await agregarProductosRequest(id, datos);
     if (respuesta) {
       return respuesta;
     }
     return;
   };
-  const retirarProductos = async (id, Cantidad) => {
-    const respuesta = await retirarProductosRequest(id, Cantidad);
+  const retirarProductos = async (id, datos) => {
+    const respuesta = await retirarProductosRequest(id, datos);
     if (respuesta) {
       return respuesta;
     }

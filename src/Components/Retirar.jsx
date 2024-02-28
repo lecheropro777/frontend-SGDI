@@ -1,11 +1,12 @@
 import { lazy, useContext, useState } from "react";
 import { Contexto } from "../Context/ContextProvider";
 import { Button, TextField } from "@mui/material";
-// import Swal from "sweetalert2";
-const Swal = lazy(() => import("sweetalert2"));
+import Swal from "sweetalert2";
 import { QRScanner } from "./QrScanner";
+import { AuthContext } from "../Context/AuthProvider";
 function Retirar() {
   const { verProductoPorCodigoBarras, retirarProductos } = useContext(Contexto);
+  const {usuario}=useContext(AuthContext)
   const [CodigoBarras, setCodigoBarras] = useState("");
   const [cantidad, setCantidad] = useState(null);
   const [producto, setProducto] = useState({
@@ -35,8 +36,14 @@ function Retirar() {
   };
 
   const submitCantidad = async () => {
-    const cantidadParaAgregar = cantidad;
-    const CantidadParseada = { Cantidad: cantidadParaAgregar };
+    // const cantidadParaAgregar = cantidad;
+    // const CantidadParseada = { Cantidad: cantidadParaAgregar };
+
+    const datos={
+      Cantidad:cantidad,
+      Usuario:usuario.usuario
+    }
+
     Swal.fire({
       title: "¿Retirar existencias?",
       showDenyButton: true,
@@ -46,7 +53,7 @@ function Retirar() {
       if (result.isConfirmed) {
         const enviarCantidadNueva = retirarProductos(
           producto.id,
-          CantidadParseada
+          datos
         );
         window.location.href = "/inventario";
       }
