@@ -15,7 +15,7 @@ export function Login() {
       <Formik
         initialValues={datos}
         enableReinitialize={true}
-        onSubmit={async (values, actions) => {
+        onSubmit={async (values) => {
           if (!values.Usuario) {
             Swal.fire({
               icon: "error",

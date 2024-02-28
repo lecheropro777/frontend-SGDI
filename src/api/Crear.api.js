@@ -2,7 +2,7 @@ import axios from "./axiosCredentials";
 
 const BaseUrlProductos = import.meta.env.VITE_BASEURLPRODUCTOS;
 const BaseUrlUsuarios = import.meta.env.VITE_BASEURLUSUARIOS;
-
+const BaseUrlLogs = import.meta.env.VITE_BASEURLLOGS;
 export const VerTareas = async () => await axios.get(`${BaseUrlProductos}`);
 
 export const CrearTarea = async (producto) =>
@@ -54,4 +54,8 @@ export const eliminarUsuarioRequest = async (id) => {
 
 export const verUsuariosRequest = async () => {
   return await axios.get(`${BaseUrlUsuarios}verAllUsers`);
+};
+
+export const verLogsRequest = async () => {
+  return await axios.get(`${BaseUrlLogs}`);
 };

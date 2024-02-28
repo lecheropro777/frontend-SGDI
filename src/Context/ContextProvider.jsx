@@ -9,15 +9,15 @@ import {
   agregarProductosRequest,
   retirarProductosRequest,
   verPendientesRequest,
+  verLogsRequest,
 } from "../api/Crear.api";
 import Swal from "sweetalert2";
-
 
 export const Contexto = createContext();
 
 export const InventarioProvider = ({ children }) => {
   const [data, setData] = useState([]);
-  const [pendientes,setPendientes]=useState([])
+  const [pendientes, setPendientes] = useState([]);
 
   const VerObjetos = async () => {
     const datos = await VerTareas();
@@ -49,7 +49,7 @@ export const InventarioProvider = ({ children }) => {
     });
   };
 
-  const EliminarObjetos = async (id,usuario) => {
+  const EliminarObjetos = async (id, usuario) => {
     Swal.fire({
       title: "Desea eliminar?",
       text: "Nose podra recuperar!",
@@ -60,9 +60,9 @@ export const InventarioProvider = ({ children }) => {
       confirmButtonText: "Sí",
     }).then((result) => {
       if (result.isConfirmed) {
-        BorrarTarea(id,usuario);
+        BorrarTarea(id, usuario);
         setData(data.filter((item) => item._id !== id));
-        window.location.href="/inventario"
+        window.location.href = "/inventario";
       }
     });
   };
@@ -108,9 +108,13 @@ export const InventarioProvider = ({ children }) => {
 
   const verPendientes = async () => {
     const pendientesResultados = await verPendientesRequest();
-    setPendientes(pendientesResultados.data)
+    setPendientes(pendientesResultados.data);
   };
 
+  const verLogs = async () => {
+    const logs = await verLogsRequest();
+    return logs;
+  };
 
   useEffect(() => {
     VerObjetos();
@@ -132,6 +136,7 @@ export const InventarioProvider = ({ children }) => {
         verProductoPorCodigoBarras,
         agregarProductos,
         retirarProductos,
+        verLogs,
       }}
     >
       {children}
