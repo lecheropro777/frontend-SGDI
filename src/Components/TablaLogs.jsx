@@ -35,7 +35,7 @@ export function TablaLogs(props) {
         <Table sx={{ minWidth: 200 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="left">Quien hizo</StyledTableCell>
+              <StyledTableCell align="left">Quien</StyledTableCell>
               <StyledTableCell align="left">Que hizo</StyledTableCell>
               <StyledTableCell align="left">Descripcion</StyledTableCell>
             </TableRow>
