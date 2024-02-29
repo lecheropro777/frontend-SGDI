@@ -1,9 +1,6 @@
 const PUBLIC_VAPID_KEY =
   "BG2PQAEPq2B0sNF8rGvvO2Bq0nFPkF644GiLRn9o_F0NIjCDmlYwRG-Wo6okeYGdUMuaRvPUy4SCq_SYTWk9VMQ";
 
-const notificacionesBaseURLProduccion=""
-const notificacionesBaseURLDev=""
-
 console.log(notificacionesBaseURLDev)
 
 const subscribeAndPoll = async () => {
