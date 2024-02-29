@@ -5,6 +5,9 @@ import { Button, TextField } from "@mui/material";
 const CustomizedTables = lazy(() => import("./Tabla"));
 
 function Inventario() {
+
+
+  
   const navigate = useNavigate();
   const [productos, setProductos] = useState([]);
   const [search, setSearch] = useState("");
